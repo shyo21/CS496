@@ -1,5 +1,8 @@
 package com.example.proj1;
 
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +40,7 @@ public class Frag2 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag2.
+     * @return A new instance of fragment Frag1.
      */
     // TODO: Rename and change types and number of parameters
     public static Frag2 newInstance(String param1, String param2) {
@@ -55,10 +61,27 @@ public class Frag2 extends Fragment {
         }
     }
 
+    private GridView gridView;
+    private GDadapter gridAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag2, container, false);
+        View myview = inflater.inflate(R.layout.fragment_frag2, container, false);
+        gridView = (GridView) myview.findViewById(R.id.gridView);
+        gridAdapter = new GDadapter(getActivity(), R.layout.grid_layout, getData());
+        gridView.setAdapter(gridAdapter);
+        return myview;
+    }
+
+    private ArrayList<ImageItem> getData() {
+        final ArrayList<ImageItem> imageItems = new ArrayList<>();
+        TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
+        for (int i = 0; i < imgs.length(); i++) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
+            imageItems.add(new ImageItem(bitmap));
+        }
+        return imageItems;
     }
 }
