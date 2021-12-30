@@ -1,29 +1,80 @@
 package com.example.proj1;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
 
-public class GDadapter extends ArrayAdapter {
+public class GDadapter extends BaseAdapter {
+
+    private Integer[] images = {
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img3,
+            R.drawable.img2,
+            R.drawable.img1,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3
+    };
+    private LayoutInflater GDinflater;
     private Context context;
-    private int layoutResourceId;
-    private ArrayList<ImageItem> data = new ArrayList<ImageItem>();
+    private int optWidth;
 
-    public GDadapter(@NonNull Context context, int layoutResourceId, ArrayList<ImageItem> data) {
-        super(context, layoutResourceId, data);
-        this.layoutResourceId = layoutResourceId;
+    public GDadapter(@NonNull Context context, int optWidth) {
+        super();
+        this.GDinflater = LayoutInflater.from(context);
         this.context = context;
-        this.data = data;
+        this.optWidth = optWidth;
+    }
+
+    @Override
+    public int getCount() {
+        return images.length;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
@@ -32,22 +83,21 @@ public class GDadapter extends ArrayAdapter {
         ViewHolder holder = null;
 
         if (row == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
-            holder = new ViewHolder();;
-            holder.image = (ImageView) row.findViewById(R.id.image);
+            row = GDinflater.inflate(R.layout.grid_layout, parent, false);
+            holder = new ViewHolder();
+            holder.image = (ImageView) row.findViewById(R.id.imageView);
+            holder.image.getLayoutParams().height = optWidth;
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
         }
 
-        ImageItem item = data.get(position);
-        holder.image.setImageBitmap(item.getImage());
+        Glide.with(context).load(images[position]).thumbnail(0.1f).placeholder(R.drawable.load).into(holder.image);
         return row;
     }
 
     static class ViewHolder {
         ImageView image;
     }
-}
 
+}

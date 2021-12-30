@@ -6,24 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".Frag2">
 
-
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
         android:clickable="true"
-        android:columnWidth="100dp"
-        android:drawSelectorOnTop="true"
-        android:focusable="true"
+        android:fadeScrollbars="true"
+        android:focusable="auto"
         android:gravity="center"
         android:numColumns="auto_fit"
+        android:scrollIndicators="left"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="vertical"
+        android:smoothScrollbar="true"
         android:stretchMode="columnWidth"
-        android:verticalScrollbarPosition="right"
-        android:verticalSpacing="0dp" />
+        android:verticalScrollbarPosition="right" />
 </RelativeLayout>
