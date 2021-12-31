@@ -9,16 +9,16 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 public class VPadapter extends FragmentPagerAdapter {
-    private ArrayList<Fragment> items;
-    private ArrayList<String> texts;
+    private final ArrayList<Fragment> items;
+    private final ArrayList<String> texts;
     public VPadapter(@NonNull FragmentManager fm) {
         super(fm);
-        items = new ArrayList<Fragment>();
+        items = new ArrayList<>();
         items.add(new Frag1());
         items.add(new Frag2());
         items.add(new Frag3());
 
-        texts = new ArrayList<String>();
+        texts = new ArrayList<>();
         texts.add("Contacts");
         texts.add("Gallery");
         texts.add("Something");
