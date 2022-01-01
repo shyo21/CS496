@@ -29,8 +29,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -40,6 +44,8 @@ public class Frag1 extends Fragment {
     private ArrayList<ContactData> mArrayList; //ContactArrayList
     private ContactAdapter mAdapter; //ContactAdapter
     private ConstraintLayout mLayout;
+    private FloatingActionButton mFAB;
+    private EditText dialog_name, dialog_number;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class Frag1 extends Fragment {
 
         mLayout = myView.findViewById(R.id.layout);
         mRecyclerView = myView.findViewById(R.id.ContactRecyclerView);
+        mFAB = myView.findViewById(R.id.floatingActionButton2);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mArrayList = new ArrayList<>();
@@ -71,6 +78,50 @@ public class Frag1 extends Fragment {
         // load contact by asynctask
         LoadContactsAsync lca = new LoadContactsAsync();
         lca.execute();
+
+        mFAB.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                LayoutInflater inflater = requireActivity().getLayoutInflater();
+                View dialog = inflater.inflate(R.layout.contact_dialog_info, null);
+                alertDialogBuilder.setView(dialog);
+                dialog_name = dialog.findViewById (R.id.dialog_name);
+                dialog_number = dialog.findViewById (R.id.dialog_number);
+
+                alertDialogBuilder.setMessage("Add contact");
+                alertDialogBuilder.setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                if(dialog_name.getText ().length ()==0&&dialog_number.getText ().length ()==0){
+                                    Toast.makeText (mContext,"이름과 전화번호를 입력해주세요", Toast.LENGTH_SHORT).show ();
+                                }else{
+                                    String name = dialog_name.getText ().toString ();
+                                    String number = dialog_number.getText ().toString ();
+                                    dialog_name.setText ("");
+                                    dialog_number.setText ("");
+                                    ContactData data = new ContactData ();
+                                    data.setName(name);
+                                    data.setNumber(number);
+                                    mArrayList.add (data);
+                                    mAdapter.notifyItemInserted (mArrayList.size ()-1);
+                                }
+                            }
+                        });
+
+                alertDialogBuilder.setNegativeButton("cancel",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+
+                            }
+                        });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
+
 
         return myView;
     }
