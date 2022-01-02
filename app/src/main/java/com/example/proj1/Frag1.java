@@ -69,6 +69,13 @@ public class Frag1 extends Fragment {
         mAdapter = new ContactAdapter(mContext, mArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
+//        // data instance
+//        ContactData data = new ContactData ();
+//        data.setName("Heewoo");
+//        data.setNumber("01058043832");
+//        mArrayList.add (data);
+//        mAdapter.notifyItemInserted (mArrayList.size ()-1);
+
         // ask permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkVerify();
