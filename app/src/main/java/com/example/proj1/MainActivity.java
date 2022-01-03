@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         VPadapter ad = new VPadapter(getSupportFragmentManager());
         vp.setAdapter(ad);
 
+
         TabLayout tab = findViewById(R.id.tab);
         tab.setupWithViewPager(vp);
     }
