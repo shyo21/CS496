@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/flashlight_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -48,7 +49,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/darkmode_back"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -64,9 +66,10 @@
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/alarm_back"
+                android:src="@drawable/voicememo_back"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -82,9 +85,48 @@
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/voicememo_back"
+                android:src="@drawable/screenrecord_back"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/imageFrame5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageFrame3">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/alarm_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/imageFrame6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageFrame4">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/qr_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

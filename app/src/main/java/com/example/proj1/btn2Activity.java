@@ -1,8 +1,8 @@
 package com.example.proj1;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -15,10 +15,11 @@ public class btn2Activity extends AppCompatActivity {
     SharedPreferences appSettingPrefs;
     SharedPreferences.Editor sharedPrefsEdit;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dark_mode);
+        setContentView(R.layout.frag3_btn2);
 
         switch_btn = findViewById(R.id.btn_dark_mode);
 
@@ -34,23 +35,17 @@ public class btn2Activity extends AppCompatActivity {
             switch_btn.setText("Enable Dark Mode");
         }
 
-        switch_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isNightModeOn){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    sharedPrefsEdit.putBoolean("NightMode", false);
-                    sharedPrefsEdit.apply();
-
-                    switch_btn.setText("Enable Dark Mode");
-                } else{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    sharedPrefsEdit.putBoolean("NightMode", true);
-                    sharedPrefsEdit.apply();
-
-                    switch_btn.setText("Disable Dark Mode");
-                }
-
+        switch_btn.setOnClickListener(view -> {
+            if (isNightModeOn){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                sharedPrefsEdit.putBoolean("NightMode", false);
+                sharedPrefsEdit.apply();
+                switch_btn.setText("Enable Dark Mode");
+            } else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                sharedPrefsEdit.putBoolean("NightMode", true);
+                sharedPrefsEdit.apply();
+                switch_btn.setText("Disable Dark Mode");
             }
         });
     }

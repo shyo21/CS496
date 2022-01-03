@@ -21,7 +21,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:ignore="HardcodedText,SpUsage" />
 
     <TextView
         android:id="@+id/tv_number"
@@ -35,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        tools:ignore="HardcodedText,SpUsage"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -46,7 +48,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -64,7 +67,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintVertical_bias="0.49"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/callButton"
@@ -75,7 +79,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/removeButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintVertical_bias="0.49"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/messageButton"
@@ -85,6 +90,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/callButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintVertical_bias="0.49"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

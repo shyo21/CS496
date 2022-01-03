@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".btn1Activity">
+    android:layout_height="match_parent">
 
-    <Switch
-        android:id="@+id/flashSwitch"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Flash OFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="318dp"
+        android:text="Hi I am Button 6!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

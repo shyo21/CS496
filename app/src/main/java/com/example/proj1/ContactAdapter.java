@@ -1,20 +1,18 @@
 package com.example.proj1;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.provider.MediaStore;
+// import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,8 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
-    private String TAG = "ContactAdapter";
-    private Context mContext;
+    private final Context mContext;
     private ArrayList<ContactData> mArrayList; //데이터를 담을 어레이리스트
 
     public ContactAdapter(Context context, ArrayList<ContactData> arrayList) {
@@ -39,8 +36,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService (Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate (R.layout.contact_item, parent, false);
-        ViewHolder vh = new ViewHolder (view);
-        return vh;
+        return new ViewHolder(view);
     }
 
     //리스트의 각 항목에 들어갈 데이터를 지정.
@@ -55,6 +51,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     //화면에 보여줄 데이터의 갯수를 반환.
     @Override
     public int getItemCount() {
+        String TAG = "ContactAdapter";
         Log.d (TAG, "getItemCount: "+mArrayList.size ());
         return mArrayList.size ();
     }
@@ -75,40 +72,31 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             this.btn_message = itemView.findViewById(R.id.messageButton);
             position = getAdapterPosition();
 
-            btn_remove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    position = getAdapterPosition();
-                    mArrayList.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, getItemCount());
-//                    Toast.makeText(mContext,Integer.toString(position),Toast.LENGTH_SHORT).show();
+            btn_remove.setOnClickListener(view -> {
+                position = getAdapterPosition();
+                mArrayList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, getItemCount());
+                /* Toast.makeText(mContext,Integer.toString(position),Toast.LENGTH_SHORT).show(); */
 
-                }
             });
 
-            btn_call.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    position = getAdapterPosition();
-                    phoneNumber = mArrayList.get(position).getNumber();
-                    Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:".concat(phoneNumber)));
-                    intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                    view.getContext().startActivity(intent);
-                }
+            btn_call.setOnClickListener(view -> {
+                position = getAdapterPosition();
+                phoneNumber = mArrayList.get(position).getNumber();
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:".concat(phoneNumber)));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
             });
 
-            btn_message.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    position = getAdapterPosition();
-                    phoneNumber = mArrayList.get(position).getNumber();
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse("smsto:".concat(phoneNumber)));
-                    intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-                    view.getContext().startActivity(intent);
-                }
+            btn_message.setOnClickListener(view -> {
+                position = getAdapterPosition();
+                phoneNumber = mArrayList.get(position).getNumber();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("smsto:".concat(phoneNumber)));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
             });
 
         }
@@ -118,18 +106,20 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     private ArrayList<ContactData> getAllContacts() {
         Uri uri;
         Cursor cursor;
-        int column_index_data;
-        ArrayList<String> listContacts = new ArrayList<>();
-        String absPath;
         uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
 
-        String[] proj = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
+        /*
+         int column_index_data;
+         ArrayList<String> listContacts = new ArrayList<>();
+         String absPath;
+         String[] proj = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
+         cursor = mContext.getContentResolver().query(uri, proj, null, null, null);
+         ContentResolver contentResolver = getContentResolver ();
+        */
 
-//        cursor = mContext.getContentResolver().query(uri, proj, null, null, null);
-//        ContentResolver contentResolver = getContentResolver ();
         cursor =  mContext.getContentResolver().query (uri, null, null, null, null);
 
-//        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+        // column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
 
         while (cursor.moveToNext()) {
 
