@@ -46,6 +46,14 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.github.HBiSoft:HBRecorder:0.1.15'
+
+    // CameraX core library using the camera2 implementation
+    def camerax_version = "1.0.2"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    implementation "androidx.camera:camera-view:1.0.0-alpha31"
+    // qrcode reader
+    implementation 'com.google.zxing:core:3.4.0'
 }
 
 allprojects {
