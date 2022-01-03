@@ -84,8 +84,8 @@ public class Frag1 extends Fragment {
         }
 
         // load contact by asynctask
-        LoadContactsAsync lca = new LoadContactsAsync();
-        lca.execute();
+//        LoadContactsAsync lca = new LoadContactsAsync();
+//        lca.execute();
 
         mFAB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
