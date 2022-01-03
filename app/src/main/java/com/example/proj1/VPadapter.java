@@ -21,7 +21,7 @@ public class VPadapter extends FragmentPagerAdapter {
         texts = new ArrayList<>();
         texts.add("Contacts");
         texts.add("Gallery");
-        texts.add("Something");
+        texts.add("Tools");
     }
 
     @NonNull
