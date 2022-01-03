@@ -27,8 +27,9 @@ public class Frag3 extends Fragment {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int width = displaymetrics.widthPixels;
-        int optWidth = (int) (0.2 * width);
+        int optWidth = (int) (0.22 * width);
         int optMargin = (int) (0.25 * width);
+        int optDis = (int) (0.02 * width);
 
         // Set button 1 and click handler for it
         ConstraintLayout btnFrame1 = myView.findViewById(R.id.imageFrame1);
@@ -60,7 +61,7 @@ public class Frag3 extends Fragment {
         ConstraintLayout btnFrame3 = myView.findViewById(R.id.imageFrame3);
         ImageView btn3 = myView.findViewById(R.id.imageView3);
         ConstraintLayout.LayoutParams params3 = (ConstraintLayout.LayoutParams) btnFrame3.getLayoutParams();
-        params3.setMargins(optMargin,100,0,0);
+        params3.setMargins(optMargin,optDis,0,0);
         params3.width = optWidth;
         params3.height = (int) (1.15*optWidth);
         btnFrame3.setLayoutParams(params3);
@@ -73,7 +74,7 @@ public class Frag3 extends Fragment {
         ConstraintLayout btnFrame4 = myView.findViewById(R.id.imageFrame4);
         ImageView btn4 = myView.findViewById(R.id.imageView4);
         ConstraintLayout.LayoutParams params4 = (ConstraintLayout.LayoutParams) btnFrame4.getLayoutParams();
-        params4.setMargins(0,100,optMargin,0);
+        params4.setMargins(0,optDis,optMargin,0);
         params4.width = optWidth;
         params4.height = (int) (1.15*optWidth);
         btnFrame4.setLayoutParams(params4);
