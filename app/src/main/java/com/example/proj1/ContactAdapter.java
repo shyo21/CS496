@@ -82,7 +82,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                     mArrayList.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, getItemCount());
-                    Toast.makeText(mContext,Integer.toString(position),Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext,Integer.toString(position),Toast.LENGTH_SHORT).show();
 
                 }
             });
