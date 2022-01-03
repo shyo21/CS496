@@ -26,6 +26,9 @@
         </activity>
 
         <activity android:name=".btn1Activity" />
+        <activity android:name=".btn2Activity" />
+        <activity android:name=".btn3Activity" />
+        <activity android:name=".btn4Activity" />
     </application>
 
 </manifest>
