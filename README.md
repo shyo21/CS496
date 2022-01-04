@@ -37,6 +37,12 @@ Floating Button 을 클릭하면 Alert Dialog 이 나와 사용자 이름과 번
 4. 사진 선택시 전체화면으로 원본 사진 보여주기
 5. 아래로 당겨 갤러리 새로고침하기
 
+#### 1. 저장소에서 모든 이미지 자동으로 불러오기
+ImageAdapter의 getAllImages()에서 내부에 저장된 모든 이미지들의 파일 경로를 탐색하고, 이를 ArrayList에 저장한다.
+
+getView()에서 이 ArrayList를 이용해 사진을 표시한다.
+
+Fragment 2의 onCreateView에서 ImageAdapter를 호출해 GridView에 
 
 ## TAB 3. Tool box
 
