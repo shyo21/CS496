@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
-// import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,9 +44,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ContactData data = mArrayList.get (position);
+//        Typeface face=Typeface.createFromAsset(mContext.getAssets(),"fonts/raleway_semibold");
 
         holder.tv_name.setText (data.getName ());
         holder.tv_number.setText (data.getNumber ());
+//        holder.tv_name.setTypeface(face);
+//        holder.tv_number.setTypeface(face);
 
 //        if (activate) {
 //            holder.btn_remove.setVisibility(View.VISIBLE);
