@@ -40,9 +40,19 @@ Floating Button 을 클릭하면 Alert Dialog 이 나와 사용자 이름과 번
 #### 1. 저장소에서 모든 이미지 자동으로 불러오기
 ImageAdapter의 getAllImages()에서 내부에 저장된 모든 이미지들의 파일 경로를 탐색하고, 이를 ArrayList에 저장한다.
 
-getView()에서 이 ArrayList를 이용해 사진을 표시한다.
+getView()에서 이 ArrayList를 이용해 사진을 View에 Glide한다.
 
-Fragment 2의 onCreateView에서 ImageAdapter를 호출해 GridView에 
+Fragment 2의 onCreateView()에서 ImageAdapter를 호출해 GridView에 사진을 표시한다.
+
+#### 2. 스크롤을 통해 여러 장의 이미지 보여주기
+GridView에 내장된 스크롤 기능을 통해 여러 장의 이미지를 스크롤을 통해 표시한다.
+
+#### 3. 사용자의 기기 환경에 맞추어 격자 크기 자동으로 조절하기
+displayMetrics를 가져와 사용자의 기기 환경을 파악한다.
+
+default width를 250px로 설정하고, 그 주변의 값 중 기기의 display width를 꽉 채울 수 있는 가장 적절한 값을 계산해 optimalWidth로 설정한다.
+
+Column의 갯수는 auto_fill로 설정해 optimalWidth에 적합한 갯수를 찾는다.
 
 ## TAB 3. Tool box
 
