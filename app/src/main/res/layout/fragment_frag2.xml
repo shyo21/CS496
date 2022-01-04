@@ -28,7 +28,7 @@
             android:layout_marginBottom="2dp"
             android:clickable="true"
             android:fadeScrollbars="true"
-            android:focusable="auto"
+            android:nestedScrollingEnabled="true"
             android:gravity="center"
             android:numColumns="auto_fit"
             android:scrollIndicators="left"
