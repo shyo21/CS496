@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -36,8 +36,7 @@ public class btn4Activity extends AppCompatActivity implements HBRecorderListene
     private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 101;
     private static final int PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE = 102;
     HBRecorder hbRecorder;
-    Button btnStart,btnStop;
-    boolean hasPermissions;
+    ImageButton recordButton;
     ContentValues contentValues;
     ContentResolver resolver;
     Uri mUri;
@@ -47,19 +46,25 @@ public class btn4Activity extends AppCompatActivity implements HBRecorderListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frag3_btn4);
         hbRecorder = new HBRecorder(this, this);
-        btnStart=findViewById(R.id.btnStart);
-        btnStop=findViewById(R.id.btnStop);
+        recordButton = findViewById(R.id.recordButton);
+        recordButton.setTag(0);
         hbRecorder.setVideoEncoder("H264");
 
-        btnStart.setOnClickListener(v -> {
+        recordButton.setOnClickListener(v -> {
+            int status = (int) recordButton.getTag();
             if (checkSelfPermission(Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_RECORD_AUDIO)
                     && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE)) {
-                hasPermissions = true;
-            }
-            if (hasPermissions) { startRecordingScreen(); }
+                if (status == 0) {
+                    startRecordingScreen();
+                    recordButton.setImageResource(R.drawable.recordstop);
+                    recordButton.setTag(1);
+                } else {
+                    hbRecorder.stopScreenRecording();
+                    recordButton.setImageResource(R.drawable.recordstart);
+                    recordButton.setTag(0);
+                }
+            } else { Toast.makeText(this, "no Permission", Toast.LENGTH_SHORT).show(); }
         });
-
-        btnStop.setOnClickListener(v -> hbRecorder.stopScreenRecording());
     }
 
     @Override

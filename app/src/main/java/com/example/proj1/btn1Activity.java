@@ -30,7 +30,6 @@ public class btn1Activity extends AppCompatActivity {
         CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         if(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             if(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-                Toast.makeText(this, "This device has flash", Toast.LENGTH_SHORT).show();
                 flashControl.setEnabled(true);
             } else { Toast.makeText(this, "This device has no flash", Toast.LENGTH_SHORT).show(); }
         } else { Toast.makeText(this, "This device has no camera", Toast.LENGTH_SHORT).show(); }
