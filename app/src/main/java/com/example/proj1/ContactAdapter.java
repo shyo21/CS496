@@ -23,10 +23,12 @@ import java.util.Collections;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
     private final Context mContext;
     private ArrayList<ContactData> mArrayList; //데이터를 담을 어레이리스트
+    private boolean activate;
 
     public ContactAdapter(Context context, ArrayList<ContactData> arrayList) {
         this.mArrayList = arrayList;
         this.mContext =context;
+        this.activate = false;
         mArrayList = getAllContacts();
     }
 
@@ -46,6 +48,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
         holder.tv_name.setText (data.getName ());
         holder.tv_number.setText (data.getNumber ());
+
+//        if (activate) {
+//            holder.btn_remove.setVisibility(View.VISIBLE);
+//        } else {
+//            holder.btn_remove.setVisibility(View.INVISIBLE);
+//        }
     }
 
     //화면에 보여줄 데이터의 갯수를 반환.
@@ -74,6 +82,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
             btn_remove.setOnClickListener(view -> {
                 position = getAdapterPosition();
+                String phone = mArrayList.get(position).getNumber();
+                String name = mArrayList.get(position).getName();
+                Log.d("remove start", phone.concat(name));
+                deleteContact(btn_remove.getContext(), phone, name);
                 mArrayList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, getItemCount());
@@ -100,6 +112,33 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             });
 
         }
+    }
+
+    public static boolean deleteContact(Context ctx, String phone, String name) {
+        Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phone));
+        Cursor cur = ctx.getContentResolver().query(contactUri, null, null, null, null);
+        try {
+            if (cur.moveToFirst()) {
+                do {
+                    String display_name = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                    Log.d("in cur", display_name);
+                    if (display_name.equalsIgnoreCase(name)) {
+                        String lookupKey = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.LOOKUP_KEY));
+                        Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, lookupKey);
+                        ctx.getContentResolver().delete(uri, null, null);
+                        ctx.getContentResolver().notifyChange(uri, null);
+                        return true;
+                    }
+
+                } while (cur.moveToNext());
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        } finally {
+            cur.close();
+        }
+        return false;
     }
 
     @SuppressLint("Recycle")
@@ -134,6 +173,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
         Collections.reverse(mArrayList);
         return mArrayList;
+    }
+
+    public void activateButtons(boolean activate) {
+        this.activate = activate;
+        notifyDataSetChanged(); //need to call it for the child views to be re-created with buttons.
     }
 }
 

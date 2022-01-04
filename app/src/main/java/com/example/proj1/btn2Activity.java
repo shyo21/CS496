@@ -3,7 +3,9 @@ package com.example.proj1;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 public class btn2Activity extends AppCompatActivity {
     Button switch_btn;
+    ImageView sun_image, moon_image;
     boolean isNightModeOn;
     SharedPreferences appSettingPrefs;
     SharedPreferences.Editor sharedPrefsEdit;
@@ -22,6 +25,8 @@ public class btn2Activity extends AppCompatActivity {
         setContentView(R.layout.frag3_btn2);
 
         switch_btn = findViewById(R.id.btn_dark_mode);
+        sun_image = findViewById(R.id.sun);
+        moon_image = findViewById(R.id.moon);
 
         appSettingPrefs = getSharedPreferences("AppSettingPrefs", 0);
         sharedPrefsEdit = appSettingPrefs.edit();
@@ -29,10 +34,15 @@ public class btn2Activity extends AppCompatActivity {
 
         if (isNightModeOn){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            switch_btn.setText("Disable Dark Mode");
+            //switch_btn.setText("Disable Dark Mode");
+            moon_image.setVisibility(View.VISIBLE);
+            sun_image.setVisibility(View.INVISIBLE);
+
         } else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            switch_btn.setText("Enable Dark Mode");
+            //switch_btn.setText("Enable Dark Mode");
+            sun_image.setVisibility(View.VISIBLE);
+            moon_image.setVisibility(View.INVISIBLE);
         }
 
         switch_btn.setOnClickListener(view -> {
@@ -40,12 +50,16 @@ public class btn2Activity extends AppCompatActivity {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 sharedPrefsEdit.putBoolean("NightMode", false);
                 sharedPrefsEdit.apply();
-                switch_btn.setText("Enable Dark Mode");
+                //switch_btn.setText("Enable Dark Mode");
+                sun_image.setVisibility(View.VISIBLE);
+                moon_image.setVisibility(View.INVISIBLE);
             } else{
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 sharedPrefsEdit.putBoolean("NightMode", true);
                 sharedPrefsEdit.apply();
-                switch_btn.setText("Disable Dark Mode");
+                //switch_btn.setText("Disable Dark Mode");
+                moon_image.setVisibility(View.VISIBLE);
+                sun_image.setVisibility(View.INVISIBLE);
             }
         });
     }
