@@ -77,11 +77,18 @@ FrameLayout을 swipeRefreshLayout으로 감싼 뒤 setOnRefreshListner()를 추�
 4. 화면녹화
 5. QR코드 리더기 
 
+#### 0. 기본 구조
+ScrollView안에 ConstraintLayout을 삽입하고, 6개의 clickable ImageView를 배치해 도구 아이콘을 표시했다.
+
 #### 1. 손전등 
 디바이스에 손전등이 있는지 확인한 후, toggle 하여 손전등을 조절한다. 
+
 #### 2. 다크모드
 화면을 클릭하여 다크모드를 조정하고 
 sharedPreferences에 설정값을 저장한다. 
+
 #### 3. 음성녹음
+
 #### 4. 화면녹화
+
 #### 5. QR코드 리더기 
