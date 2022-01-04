@@ -85,7 +85,9 @@ public class Frag2 extends Fragment {
         gridView.animate().alpha(0f).setDuration(shortAnimationDuration)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
-                    public void onAnimationEnd(Animator animation) { gridView.setVisibility(View.GONE); }
+                    public void onAnimationEnd(Animator animation) {
+                        gridView.setVisibility(View.GONE);
+                    }
                 });
 
         // when 2nd touch, reverse to original
