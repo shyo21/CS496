@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class Frag1 extends Fragment {
         mAdapter = new ContactAdapter(mContext, mArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
+
         /*
         data instance
         ContactData data = new ContactData ();
@@ -97,6 +99,13 @@ public class Frag1 extends Fragment {
                             data.setNumber(number);
                             mArrayList.add (data);
                             mAdapter.notifyItemInserted (mArrayList.size ()-1);
+
+                            // add contact using intent
+                            Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+                            intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+                            intent.putExtra(ContactsContract.Intents.Insert.PHONE, number)
+                            .putExtra(ContactsContract.Intents.Insert.NAME, name);
+                            startActivity(intent);
                         }
                     });
 
