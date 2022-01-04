@@ -1,4 +1,4 @@
-# CS496
+# CS496 Project 1
 
 ## 팀원
 [김수효], [이희우]
@@ -53,6 +53,20 @@ displayMetrics를 가져와 사용자의 기기 환경을 파악한다.
 default width를 250px로 설정하고, 그 주변의 값 중 기기의 display width를 꽉 채울 수 있는 가장 적절한 값을 계산해 optimalWidth로 설정한다.
 
 Column의 갯수는 auto_fill로 설정해 optimalWidth에 적합한 갯수를 찾는다.
+
+이를 통해 기기의 화면 크기, 가로 또는 세로 모드에 상관없이 화면에 꽉 찬 격자 배치를 얻을 수 있다.
+
+#### 4. 사진 선택시 전체화면으로 원본 사진 보여주기
+onClickListner를 통해 GridView의 각 item에 대한 클릭 여부를 파악하고, 클릭시 ImageView에 해당 사진을 Glide한다.
+
+GridView와 ImageView는 FrameLayout에 함께 묶여 있어 visibility 조절을 통해 어떤 view를 보여줄지 선택할 수 있다.
+
+visibility조절을 할 때 애니메이션을 삽입해 자연스러운 화면 전환 효과를 추가했다.
+
+#### 5. 아래로 당겨 갤러리 새로고침하기
+새로운 사진을 다운로드하거나 촬영한 경우 View를 새로고침하여 새롭게 추가된 이미지를 갤러리 화면에 띄울 수 있다.
+
+FrameLayout을 swipeRefreshLayout으로 감싼 뒤 setOnRefreshListner()를 추가해 아래로 당기면 새로고침된다.
 
 ## TAB 3. Tool box
 
