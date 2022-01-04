@@ -23,6 +23,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     private final Context mContext;
     private ArrayList<ContactData> mArrayList; //데이터를 담을 어레이리스트
     private boolean activate;
+    private boolean isNightModeOn;
 
     public ContactAdapter(Context context, ArrayList<ContactData> arrayList) {
         this.mArrayList = arrayList;
@@ -45,9 +46,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ContactData data = mArrayList.get (position);
 //        Typeface face=Typeface.createFromAsset(mContext.getAssets(),"fonts/raleway_semibold");
-
+//
         holder.tv_name.setText (data.getName ());
         holder.tv_number.setText (data.getNumber ());
+        isNightModeOn = mContext.getSharedPreferences("AppSettingPrefs", 0).getBoolean("NightMode", false);
 //        holder.tv_name.setTypeface(face);
 //        holder.tv_number.setTypeface(face);
 
@@ -81,6 +83,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             this.btn_call = itemView.findViewById(R.id.callButton);
             this.btn_message = itemView.findViewById(R.id.messageButton);
             position = getAdapterPosition();
+//            if (isNightModeOn){
+//                btn_remove.setImageResource(R.drawable.person_dark);
+//            }
 
             btn_remove.setOnClickListener(view -> {
                 position = getAdapterPosition();

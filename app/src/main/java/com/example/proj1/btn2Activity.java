@@ -30,7 +30,7 @@ public class btn2Activity extends AppCompatActivity {
 
         appSettingPrefs = getSharedPreferences("AppSettingPrefs", 0);
         sharedPrefsEdit = appSettingPrefs.edit();
-        isNightModeOn = appSettingPrefs.getBoolean("NightMode", false);
+        isNightModeOn = getSharedPreferences("AppSettingPrefs", 0).getBoolean("NightMode", false);
 
         if (isNightModeOn){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

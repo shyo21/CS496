@@ -13,7 +13,7 @@
         android:layout_height="27dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_semibold"
-        android:text="이름"
+        android:text="name"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -31,7 +31,7 @@
         android:layout_height="25dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/raleway_semibold"
-        android:text="전화번호"
+        android:text="phone number"
         android:textColor="@color/black"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,13 +45,14 @@
         android:id="@+id/imageView2"
         android:layout_width="83dp"
         android:layout_height="78dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:backgroundTint="@color/white"
         android:scaleType="centerCrop"
         android:src="@drawable/person"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466"
         tools:ignore="ContentDescription" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -59,13 +60,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.26034063" />
+        app:layout_constraintGuide_percent="0.21" />
 
     <ImageButton
         android:id="@+id/removeButton"
         android:layout_width="53dp"
         android:layout_height="46dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="52dp"
         android:backgroundTint="@color/white"
         android:scaleType="centerCrop"
         android:src="@drawable/trash"
