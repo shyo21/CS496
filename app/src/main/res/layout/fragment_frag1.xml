@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.952"
-        app:srcCompat="@android:drawable/ic_input_add"
+        android:src="@drawable/person_add"
         tools:ignore="ContentDescription" />
 
     <androidx.recyclerview.widget.RecyclerView

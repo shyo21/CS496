@@ -28,6 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class Frag1 extends Fragment {
+//    Typeface face=Typeface.createFromAsset(getContext().getAssets(),"fonts/raleway_semibold");
     private Context mContext; //FragmentContext
     private ArrayList<ContactData> mArrayList; //ContactArrayList
     private ContactAdapter mAdapter; //ContactAdapter
