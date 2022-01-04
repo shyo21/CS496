@@ -1,10 +1,14 @@
 package com.example.proj1;
 
 import android.annotation.SuppressLint;
+import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -92,7 +96,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                 String phone = mArrayList.get(position).getNumber();
                 String name = mArrayList.get(position).getName();
                 Log.d("remove start", phone.concat(name));
-                deleteContact(btn_remove.getContext(), phone, name);
+                deleteContact(mContext.getContentResolver(), name);
                 mArrayList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, getItemCount());
@@ -121,32 +125,46 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         }
     }
 
-    public static boolean deleteContact(Context ctx, String phone, String name) {
-        Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phone));
-        Cursor cur = ctx.getContentResolver().query(contactUri, null, null, null, null);
+    public static void deleteContact(ContentResolver contactHelper, String
+            number) {
+        ArrayList<ContentProviderOperation> ops = new
+                ArrayList<ContentProviderOperation>();
+        String[] args = new String[] { String.valueOf(getContactID(contactHelper,
+                number))};
+        ops.add(ContentProviderOperation.newDelete(ContactsContract.RawContacts.CONTENT_URI).withSelection(ContactsContract.RawContacts.CONTACT_ID + "=?", args).build());
         try {
-            if (cur.moveToFirst()) {
-                do {
-                    String display_name = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
-                    Log.d("in cur", display_name);
-                    if (display_name.equalsIgnoreCase(name)) {
-                        String lookupKey = cur.getString(cur.getColumnIndexOrThrow(ContactsContract.Contacts.LOOKUP_KEY));
-                        Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, lookupKey);
-                        ctx.getContentResolver().delete(uri, null, null);
-                        ctx.getContentResolver().notifyChange(uri, null);
-                        return true;
-                    }
-
-                } while (cur.moveToNext());
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-        } finally {
-            cur.close();
+            contactHelper.applyBatch(ContactsContract.AUTHORITY, ops);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (OperationApplicationException e) {
+            e.printStackTrace();
         }
-        return false;
     }
+
+    private static long getContactID(ContentResolver contactHelper,String
+            number) {
+        Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(number));
+        String[] projection = { ContactsContract.PhoneLookup._ID };
+        Cursor cursor = null;
+        try {
+            cursor = contactHelper.query(contactUri, projection, null, null,null);
+            if (cursor.moveToFirst()) {
+                int personID = cursor.getColumnIndex(ContactsContract.PhoneLookup._ID);
+                return cursor.getLong(personID);
+            }
+            return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+                cursor = null;
+            }
+        }
+        return -1;
+    }
+    
 
     @SuppressLint("Recycle")
     private ArrayList<ContactData> getAllContacts() {
